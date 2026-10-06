@@ -1,69 +1,78 @@
 # Desafio Técnico Target Sistemas
 
-Este repositório contém a resolução dos três desafios propostos.
+<p align="center">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
+  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+</p>
 
-## 📋 Desafios
+Este repositório reúne a solução dos três desafios propostos pela Target Sistemas, desenvolvidos em JavaScript com Node.js.
 
-### Desafio 1 - Cálculo de Comissão de Vendedores
+## Visão Geral
 
-Cálculo de comissão por vendedor com base em regras de faixas de venda.
+O projeto foi organizado em módulos separados para facilitar a leitura, manutenção e execução dos desafios:
 
-Regras:
-- Vendas < R$ 100,00: 0% de comissão
+- Desafio 1: Cálculo de comissão por vendedor
+- Desafio 2: Controle de movimentações de estoque
+- Desafio 3: Cálculo de juros por atraso
+
+## 📌 Desafios
+
+### 1. Cálculo de Comissão de Vendedores
+
+Desenvolver um programa que leia um arquivo JSON com registros de vendas e calcule a comissão total por vendedor.
+
+Regras aplicadas:
+- Vendas abaixo de R$ 100,00: 0% de comissão
 - Vendas entre R$ 100,00 e R$ 499,99: 1% de comissão
-- Vendas ≥ R$ 500,00: 5% de comissão
+- Vendas a partir de R$ 500,00: 5% de comissão
 
-Resultado: total vendido e comissão por vendedor.
+### 2. Controle de Estoque
 
-### Desafio 2 - Controle de Estoque
+Realizar movimentações de entrada e saída de produtos, com:
+- identificador único da movimentação
+- controle de saldo
+- validação de estoque disponível
+- histórico de movimentação
 
-Sistema de movimentações de entrada e saída de produtos com rastreamento.
+### 3. Cálculo de Juros por Atraso
 
-Funcionalidades:
-- ✅ Entrada de estoque
-- ✅ Saída de estoque
-- ✅ Validação de saldo
-- ✅ Identificador único por movimentação
-- ✅ Retorno do saldo atualizado
+Calcular o valor atualizado de um título vencido considerando:
+- multa diária de 2,5%
+- juros simples
+- incidência somente após o vencimento
 
-### Desafio 3 - Cálculo de Juros por Atraso
-
-Cálculo do valor atualizado de um título vencido com juros simples.
-
-Regra:
-- Multa diária de 2,5% sobre o valor original
-- Juros incidem apenas após o vencimento
-
-## 🛠️ Tecnologias
+## 🛠️ Tecnologias Utilizadas
 
 - JavaScript
 - Node.js
 - Git
 - GitHub
 
-## 🚀 Como executar
+## 🚀 Como Executar
 
 ### Pré-requisitos
 
-- Node.js instalado
+- Node.js instalado na máquina
 
-### Execução
+### Execução por desafio
 
 ```bash
-# Desafio 1 - Comissões
+# Desafio 1
 cd desafio-01-comissoes
 node index.js
 
-# Desafio 2 - Estoque
+# Desafio 2
 cd desafio-02-estoque
 node index.js
 
-# Desafio 3 - Juros
+# Desafio 3
 cd desafio-03-juros
 node index.js
 ```
 
-## 📁 Estrutura do projeto
+## 📁 Estrutura do Projeto
 
 ```text
 desafio-tecnico-target-sistemas/
@@ -85,18 +94,17 @@ desafio-tecnico-target-sistemas/
 
 As soluções foram desenvolvidas em JavaScript (Node.js) pela simplicidade de execução e legibilidade.
 
-Foram aplicadas as seguintes boas práticas:
+Foram aplicadas boas práticas como:
+- separação dos desafios por módulos
+- documentação com JSDoc
+- tratamento de exceções
+- funções com responsabilidade única
+- estrutura organizada para expansão
+- controle de versão com Git
 
-- ✅ Separação dos desafios por módulos
-- ✅ Documentação utilizando JSDoc
-- ✅ Tratamento de exceções
-- ✅ Funções com responsabilidade única
-- ✅ Estrutura preparada para expansão
-- ✅ Controle de versão através do Git
+## 📊 Exemplos de Saída
 
-## 📊 Exemplo de Saída
-
-### Desafio 1 - Comissões
+### Desafio 1
 
 ```text
 RELATÓRIO DE COMISSÕES
@@ -108,7 +116,7 @@ Total comissão: R$ 18.01
 -----------------------------
 ```
 
-### Desafio 2 - Estoque
+### Desafio 2
 
 ```text
 {
@@ -123,7 +131,7 @@ Total comissão: R$ 18.01
 }
 ```
 
-### Desafio 3 - Juros
+### Desafio 3
 
 ```text
 {
@@ -141,4 +149,8 @@ Desenvolvido por: Esdra Ribeiro
 
 ## 📝 Licença
 
-Este projeto é de código aberto e pode ser utilizado livremente.
+Este projeto é de código aberto e pode ser utilizado livremente para estudo e desenvolvimento.
+
+## 🔗 Repositório
+
+https://github.com/EsdraRibeiro/desafio-tecnico-target-sistemas
