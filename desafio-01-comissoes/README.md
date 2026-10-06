@@ -1,4 +1,9 @@
-# Desafio Técnico - Cálculo de Comissão de Vendedores
+# Desafio 01 - Cálculo de Comissão de Vendedores
+
+<p align="center">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" />
+</p>
 
 ## Objetivo
 
@@ -12,23 +17,18 @@ Desenvolver um programa que leia um arquivo JSON contendo registros de vendas e 
 
 ## Tecnologias Utilizadas
 
-- JavaScript (Node.js)
+- JavaScript
+- Node.js
 
-## Como executar
+## Como Executar
 
-1. Clone o repositório
-
-```bash
-git clone <url-do-repositorio>
-```
-
-2. Acesse a pasta
+1. Acesse a pasta do desafio:
 
 ```bash
 cd desafio-01-comissoes
 ```
 
-3. Execute o programa
+2. Execute o programa:
 
 ```bash
 node index.js
@@ -36,17 +36,26 @@ node index.js
 
 ## Estrutura da Solução
 
-O programa:
+O programa realiza as seguintes etapas:
 
-1. Lê os registros de vendas.
-2. Calcula a comissão individual de cada venda.
-3. Agrupa os resultados por vendedor.
-4. Exibe o total vendido e o total de comissão.
+1. Lê os dados de vendas do arquivo `vendas.json`
+2. Calcula a comissão de cada venda individualmente
+3. Agrupa os valores por vendedor
+4. Exibe o total vendido e o total de comissão
 
-## Exemplo de saída
+## Exemplo de Saída
 
 ```text
+RELATÓRIO DE COMISSÕES
+
 Vendedor: João Silva
-Total Vendido: R$ 10754.70
-Comissão Total: R$ 511.72
+Quantidade de vendas: 3
+Total vendido: R$ 900.50
+Total comissão: R$ 18.01
+-----------------------------
 ```
+
+## Arquivos
+
+- `index.js` - lógica principal do cálculo
+- `vendas.json` - dados de entrada com as vendas por vendedor
