@@ -1,21 +1,14 @@
 /**
- * Desafio Técnico
- * Cálculo de comissão por vendedor
- */
-
-const dados = require("./vendas.json");
-
-/**
- * Calcula a comissão de uma venda individual.
- *
+ * Desafio 01 - Cálculo de comissão por vendedor
+ * 
  * Regras:
  * - Valor < 100 => 0%
  * - Valor >= 100 e < 500 => 1%
  * - Valor >= 500 => 5%
- *
- * @param {number} valor
- * @returns {number}
  */
+
+const dados = require("./vendas.json");
+
 function calcularComissao(valor) {
   if (valor < 100) {
     return 0;
@@ -28,12 +21,10 @@ function calcularComissao(valor) {
   return valor * 0.05;
 }
 
-/**
- * Agrupa vendas e comissões por vendedor.
- *
- * @param {Array} vendas
- * @returns {Object}
- */
+function formatarMoeda(valor) {
+  return `R$ ${valor.toFixed(2).replace(".", ",")}`;
+}
+
 function calcularComissoesPorVendedor(vendas) {
   const resultado = {};
 
@@ -56,14 +47,18 @@ function calcularComissoesPorVendedor(vendas) {
   return resultado;
 }
 
-const resultado = calcularComissoesPorVendedor(dados.vendas);
+function main() {
+  const resultado = calcularComissoesPorVendedor(dados.vendas);
 
-console.log("\nRELATÓRIO DE COMISSÕES\n");
+  console.log("\nRELATÓRIO DE COMISSÕES\n");
 
-Object.entries(resultado).forEach(([vendedor, dados]) => {
-  console.log(`Vendedor: ${vendedor}`);
-  console.log(`Quantidade de vendas: ${dados.quantidadeVendas}`);
-  console.log(`Total vendido: R$ ${dados.totalVendido.toFixed(2)}`);
-  console.log(`Total comissão: R$ ${dados.totalComissao.toFixed(2)}`);
-  console.log("-----------------------------");
-});
+  Object.entries(resultado).forEach(([vendedor, info]) => {
+    console.log(`Vendedor: ${vendedor}`);
+    console.log(`Quantidade de vendas: ${info.quantidadeVendas}`);
+    console.log(`Total vendido: ${formatarMoeda(info.totalVendido)}`);
+    console.log(`Total comissão: ${formatarMoeda(info.totalComissao)}`);
+    console.log("-----------------------------");
+  });
+}
+
+main();
