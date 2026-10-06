@@ -1,78 +1,61 @@
 /**
- * Desafio 03 - Cálculo de Juros por Atraso
+ * Desafio 03 - Cálculo de juros por atraso
  *
  * Regra:
  * Aplicar multa de 2,5% ao dia sobre o valor original.
  */
 
-/**
- * Calcula a quantidade de dias em atraso.
- *
- * @param {Date} dataVencimento
- * @returns {number}
- */
 function calcularDiasAtraso(dataVencimento) {
   const hoje = new Date();
+  const vencimento = new Date(dataVencimento);
 
-  const diferencaEmMilissegundos =
-    hoje.getTime() - dataVencimento.getTime();
+  if (Number.isNaN(vencimento.getTime())) {
+    throw new Error("Data de vencimento inválida.");
+  }
 
-  const diasAtraso = Math.floor(
-    diferencaEmMilissegundos /
-      (1000 * 60 * 60 * 24)
-  );
+  const diferencaEmMilissegundos = hoje.getTime() - vencimento.getTime();
 
-  return diasAtraso > 0
-    ? diasAtraso
-    : 0;
+  if (diferencaEmMilissegundos <= 0) {
+    return 0;
+  }
+
+  return Math.floor(diferencaEmMilissegundos / (1000 * 60 * 60 * 24));
 }
 
-/**
- * Calcula os juros de um título vencido.
- *
- * @param {number} valorOriginal
- * @param {string} dataVencimento
- *
- * @returns {Object}
- */
-function calcularJuros(
-  valorOriginal,
-  dataVencimento
-) {
-  const data = new Date(dataVencimento);
+function formatarMoeda(valor) {
+  return `R$ ${valor.toFixed(2).replace(".", ",")}`;
+}
 
-  const diasAtraso =
-    calcularDiasAtraso(data);
+function calcularJuros(valorOriginal, dataVencimento) {
+  if (valorOriginal <= 0) {
+    throw new Error("O valor original deve ser maior que zero.");
+  }
 
+  const diasAtraso = calcularDiasAtraso(dataVencimento);
   const taxaJurosDia = 0.025;
 
-  const juros =
-    valorOriginal *
-    taxaJurosDia *
-    diasAtraso;
-
-  const valorFinal =
-    valorOriginal + juros;
+  const juros = valorOriginal * taxaJurosDia * diasAtraso;
+  const valorAtualizado = valorOriginal + juros;
 
   return {
-    valorOriginal,
+    valorOriginal: Number(valorOriginal.toFixed(2)),
     diasAtraso,
     percentualJurosDia: "2,5%",
-    valorJuros: Number(
-      juros.toFixed(2)
-    ),
-    valorAtualizado: Number(
-      valorFinal.toFixed(2)
-    )
+    valorJuros: Number(juros.toFixed(2)),
+    valorAtualizado: Number(valorAtualizado.toFixed(2)),
+    valorOriginalFormatado: formatarMoeda(valorOriginal),
+    valorJurosFormatado: formatarMoeda(juros),
+    valorAtualizadoFormatado: formatarMoeda(valorAtualizado),
   };
 }
 
-/**
- * Exemplo de utilização
- */
-const resultado = calcularJuros(
-  1000,
-  "2026-07-20"
-);
+function main() {
+  try {
+    const resultado = calcularJuros(1000, "2026-07-20");
+    console.log(JSON.stringify(resultado, null, 2));
+  } catch (erro) {
+    console.error(`Erro: ${erro.message}`);
+  }
+}
 
-console.log(resultado);
+main();
