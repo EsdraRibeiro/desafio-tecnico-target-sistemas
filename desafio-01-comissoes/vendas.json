@@ -1,0 +1,32 @@
+{
+  "vendas": [
+    {
+      "vendedor": "João Silva",
+      "valor": 150.50
+    },
+    {
+      "vendedor": "João Silva",
+      "valor": 250.00
+    },
+    {
+      "vendedor": "João Silva",
+      "valor": 500.00
+    },
+    {
+      "vendedor": "Maria Santos",
+      "valor": 50.00
+    },
+    {
+      "vendedor": "Maria Santos",
+      "valor": 300.00
+    },
+    {
+      "vendedor": "Pedro Costa",
+      "valor": 1000.00
+    },
+    {
+      "vendedor": "Pedro Costa",
+      "valor": 750.50
+    }
+  ]
+}
