@@ -2,57 +2,36 @@
  * Desafio 02 - Controle de Estoque
  *
  * Objetivo:
- * Realizar movimentações de entrada e saída de produtos,
- * gerando um identificador único para cada movimentação e
- * retornando o saldo final do estoque.
+ * Registrar movimentações de entrada e saída de produtos,
+ * validar o saldo disponível e retornar o resultado final.
  */
 
-const dados = require("./estoque.json");
+const fs = require("fs");
+const path = require("path");
 
-/**
- * Gera um identificador único para a movimentação.
- *
- * @returns {number}
- */
+const caminhoArquivo = path.join(__dirname, "estoque.json");
+const dados = JSON.parse(fs.readFileSync(caminhoArquivo, "utf8"));
+
 function gerarIdMovimentacao() {
   return Date.now();
 }
 
-/**
- * Localiza um produto através do código.
- *
- * @param {number} codigoProduto
- * @returns {Object}
- * @throws {Error}
- */
 function buscarProduto(codigoProduto) {
   const produto = dados.estoque.find(
-    produto => produto.codigoProduto === codigoProduto
+    (item) => item.codigoProduto === codigoProduto
   );
 
   if (!produto) {
-    throw new Error(
-      `Produto ${codigoProduto} não encontrado.`
-    );
+    throw new Error(`Produto ${codigoProduto} não encontrado.`);
   }
 
   return produto;
 }
 
-/**
- * Executa uma movimentação de estoque.
- *
- * Tipos permitidos:
- * - entrada
- * - saida
- *
- * @param {number} codigoProduto
- * @param {string} tipoMovimentacao
- * @param {number} quantidade
- * @param {string} descricaoMovimentacao
- *
- * @returns {Object}
- */
+function salvarEstoque() {
+  fs.writeFileSync(caminhoArquivo, JSON.stringify(dados, null, 2), "utf8");
+}
+
 function movimentarEstoque(
   codigoProduto,
   tipoMovimentacao,
@@ -60,54 +39,59 @@ function movimentarEstoque(
   descricaoMovimentacao
 ) {
   const produto = buscarProduto(codigoProduto);
-
   const estoqueAnterior = produto.estoque;
 
-  switch (tipoMovimentacao.toLowerCase()) {
+  const tipo = tipoMovimentacao.toLowerCase();
+
+  if (quantidade <= 0) {
+    throw new Error("A quantidade deve ser maior que zero.");
+  }
+
+  switch (tipo) {
     case "entrada":
       produto.estoque += quantidade;
       break;
 
     case "saida":
       if (quantidade > produto.estoque) {
-        throw new Error(
-          "Quantidade solicitada superior ao estoque disponível."
-        );
+        throw new Error("Quantidade solicitada superior ao estoque disponível.");
       }
-
       produto.estoque -= quantidade;
       break;
 
     default:
-      throw new Error(
-        "Tipo de movimentação inválido."
-      );
+      throw new Error("Tipo de movimentação inválido. Use 'entrada' ou 'saida'.");
   }
 
-  return {
+  const movimentacao = {
     idMovimentacao: gerarIdMovimentacao(),
-    dataMovimentacao: new Date(),
+    dataMovimentacao: new Date().toISOString(),
     descricaoMovimentacao,
     produto: produto.descricaoProduto,
-    tipoMovimentacao,
+    tipoMovimentacao: tipo,
     quantidadeMovimentada: quantidade,
     estoqueAnterior,
-    estoqueFinal: produto.estoque
+    estoqueFinal: produto.estoque,
   };
+
+  salvarEstoque();
+
+  return movimentacao;
 }
 
-/**
- * Exemplo de utilização
- */
-try {
-  const resultado = movimentarEstoque(
-    101,
-    "saida",
-    20,
-    "Venda realizada para cliente"
-  );
+function main() {
+  try {
+    const resultado = movimentarEstoque(
+      101,
+      "saida",
+      20,
+      "Venda realizada para cliente"
+    );
 
-  console.log(resultado);
-} catch (erro) {
-  console.error(erro.message);
+    console.log(JSON.stringify(resultado, null, 2));
+  } catch (erro) {
+    console.error(`Erro: ${erro.message}`);
+  }
 }
+
+main();
